@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import ObjectMapper
+import ActiveLabel
 
 class TweetsViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
     let searchController = UISearchController(searchResultsController: nil)
@@ -19,6 +20,7 @@ class TweetsViewController: UITableViewController, UISearchResultsUpdating, UISe
     var refreshInterval: Double = 0.0
     
     @IBOutlet weak var btnChangeRefeshInterval: UIBarButtonItem!
+    var activityIndicatorView: UIActivityIndicatorView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,12 +34,26 @@ class TweetsViewController: UITableViewController, UISearchResultsUpdating, UISe
         searchController.searchBar.delegate = self
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
+        
+        let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        tableView.backgroundView = activityIndicatorView
+        self.activityIndicatorView = activityIndicatorView
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+
+        
+        if let t = self.searchKeyWord {
+            self.searchTwitter(text: t, maxId: nil, sinceId: nil){ newTweets in
+                self.tweets = newTweets
+                self.tableView.reloadData()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    // Let's draw the table....
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -49,9 +65,11 @@ class TweetsViewController: UITableViewController, UISearchResultsUpdating, UISe
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "TweetRow", for: indexPath) as? TweetRow, let ts = self.tweets {
             let t = ts.statuses[indexPath.row]
-            cell.lblTweetText.setText(text: t.text!, withHashtagColor: UIColor.blue, andMentionColor: UIColor.green)
+            cell.lblTweetText.text = t.text!
+            cell.lblTweetText.handleHashtagTap(self.handleHashtagTap)
+            cell.lblTweetText.handleMentionTap(self.handleMentionTap)
+            cell.lblTweetText.handleURLTap(self.handleUrlTap)
             cell.lblTweetAuthor.text = t.user?.name
-            //cell.lblTweetText.text = t.created_at!
             return cell
         }
         
@@ -70,6 +88,7 @@ class TweetsViewController: UITableViewController, UISearchResultsUpdating, UISe
         }
     }
     
+    // Delegate functions for search
     public func updateSearchResults(for searchController: UISearchController) {
     }
     
@@ -96,11 +115,29 @@ class TweetsViewController: UITableViewController, UISearchResultsUpdating, UISe
         }
     }
     
+    func handleUrlTap(url: URL) {
+        UIApplication.shared.open(url, options: [String:Any](), completionHandler: nil)
+    }
+    
+    func handleHashtagTap(text: String) {
+        if let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "TweetsViewController") as? TweetsViewController {
+            nextVC.searchKeyWord = "#" + text
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+    }
+    
+    func handleMentionTap(text: String) {
+        if let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "TweetsViewController") as? TweetsViewController {
+            nextVC.searchKeyWord = "@" + text
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+    }
+    
+    // Handling refresh
     func autoRefresh(){
         if let x  = self.searchKeyWord, let ts = self.tweets {
             let lastId:String? = (ts.statuses.count > 0) ? ts.statuses[0].id : nil
             self.searchTwitter(text: x, maxId: nil, sinceId: lastId) { newTweets in
-//                let currentRow = self.tableView.indexPathsForVisibleRows?[0]
                 newTweets.statuses.append(contentsOf: ts.statuses)
                 ts.statuses = newTweets.statuses
                 
@@ -132,6 +169,7 @@ class TweetsViewController: UITableViewController, UISearchResultsUpdating, UISe
         }
     }
     
+    // UI handlers...
     @IBAction func refresh(_ sender: UIRefreshControl) {
         if let _ = self.timer {
             sender.endRefreshing()
@@ -190,7 +228,10 @@ class TweetsViewController: UITableViewController, UISearchResultsUpdating, UISe
     }
     
     
-    func searchTwitter(text: String, maxId: String?, sinceId: String?, callback: ((Tweets) -> Void)?) {
+    fileprivate func searchTwitter(text: String, maxId: String?, sinceId: String?, callback: ((Tweets) -> Void)?) {
+        self.title = text
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        self.activityIndicatorView?.startAnimating()
         let searchText = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         print("Searching for \(searchText), maxId: \(maxId), after: \(sinceId)")
         var url = "https://twitter-wrapper.herokuapp.com/api/tweets?q=\(searchText)"
@@ -204,10 +245,13 @@ class TweetsViewController: UITableViewController, UISearchResultsUpdating, UISe
         Alamofire.request(url)
             .validate()
             .responseJSON { response in
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 switch response.result {
                 case .success:
                     let j = JSON(object: response.result.value!)
                     if let st = j["tweets"].rawString(), let newTweets = Mapper<Tweets>().map(JSONString: st) {
+                        self.activityIndicatorView?.stopAnimating()
+                        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
                         if let c = callback {
                             c(newTweets)
                         }
@@ -222,7 +266,7 @@ class TweetsViewController: UITableViewController, UISearchResultsUpdating, UISe
 }
 
 class TweetRow : UITableViewCell {
-    @IBOutlet weak var lblTweetText: UILabel!
+    @IBOutlet weak var lblTweetText: ActiveLabel!
     @IBOutlet weak var lblTweetAuthor: UILabel!
     
 }

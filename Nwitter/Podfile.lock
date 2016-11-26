@@ -1,18 +1,21 @@
 PODS:
+  - ActiveLabel (0.7.0)
   - Alamofire (4.2.0)
   - ObjectMapper (2.2.1)
   - SwiftyJSON (3.1.3)
 
 DEPENDENCIES:
+  - ActiveLabel
   - Alamofire (~> 4.0)
   - ObjectMapper (~> 2.2)
   - SwiftyJSON
 
 SPEC CHECKSUMS:
+  ActiveLabel: eb405c5b99275be52fac161f7a55cab1dd672c54
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
   ObjectMapper: 41e43e1a89f8060ef5ea5d04ba852e269a621d68
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
 
-PODFILE CHECKSUM: a49b8b8a38804b8c8c32bab73ca74466d7f3ae6c
+PODFILE CHECKSUM: e0d946e9a5ba0ef41a1298869b43ac94cd747f1a
 
 COCOAPODS: 1.1.0.rc.2

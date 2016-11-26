@@ -14,7 +14,6 @@
 		242CD0671DE865C8000F1F16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 242CD0651DE865C8000F1F16 /* LaunchScreen.storyboard */; };
 		242CD0711DE866C4000F1F16 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242CD0701DE866C4000F1F16 /* Tweet.swift */; };
 		242CD0731DE866ED000F1F16 /* Tweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242CD0721DE866ED000F1F16 /* Tweets.swift */; };
-		242CD0751DE86DAC000F1F16 /* ULabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242CD0741DE86DAC000F1F16 /* ULabelExtension.swift */; };
 		242CD0771DE872A2000F1F16 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242CD0761DE872A2000F1F16 /* User.swift */; };
 		95942242695824030AFC58A1 /* Pods_Nwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 938E7F100A0E2FC7ECF09099 /* Pods_Nwitter.framework */; };
 /* End PBXBuildFile section */
@@ -29,7 +28,6 @@
 		242CD0681DE865C8000F1F16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		242CD0701DE866C4000F1F16 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		242CD0721DE866ED000F1F16 /* Tweets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweets.swift; sourceTree = "<group>"; };
-		242CD0741DE86DAC000F1F16 /* ULabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ULabelExtension.swift; sourceTree = "<group>"; };
 		242CD0761DE872A2000F1F16 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		31CB5A8E9117F676D2F7BF4D /* Pods-Nwitter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nwitter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nwitter/Pods-Nwitter.debug.xcconfig"; sourceTree = "<group>"; };
 		938E7F100A0E2FC7ECF09099 /* Pods_Nwitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nwitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,7 +92,6 @@
 			children = (
 				242CD05E1DE865C8000F1F16 /* TweetsViewController.swift */,
 				242CD0601DE865C8000F1F16 /* Main.storyboard */,
-				242CD0741DE86DAC000F1F16 /* ULabelExtension.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -245,7 +242,6 @@
 				242CD0771DE872A2000F1F16 /* User.swift in Sources */,
 				242CD05D1DE865C8000F1F16 /* AppDelegate.swift in Sources */,
 				242CD0731DE866ED000F1F16 /* Tweets.swift in Sources */,
-				242CD0751DE86DAC000F1F16 /* ULabelExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

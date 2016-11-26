@@ -9,5 +9,5 @@ target 'Nwitter' do
   pod 'Alamofire', '~> 4.0'
   pod 'SwiftyJSON'
   pod 'ObjectMapper', '~> 2.2'
-
+  pod 'ActiveLabel'
 end
