@@ -14,6 +14,8 @@ class Tweet : Mappable {
     var created_at: String?
     var id: String?
     var user: User?
+    var retweetCount: NSNumber = 0
+    var favoriteCount: NSNumber = 0
     
     required init?(map: Map) {
         
@@ -23,5 +25,7 @@ class Tweet : Mappable {
         created_at <- map["created_at"]
         id <- map["id_str"]
         user <- map["user"]
+        retweetCount <- map["retweet_count"]
+        favoriteCount <- map["favorite_count"]
     }
 }

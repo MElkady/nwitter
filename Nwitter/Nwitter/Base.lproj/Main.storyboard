@@ -27,7 +27,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4J8-yz-HP5" customClass="ActiveLabel" customModule="ActiveLabel">
-                                            <rect key="frame" x="8" y="37" width="359" height="58"/>
+                                            <rect key="frame" x="8" y="37" width="359" height="33.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -41,19 +41,43 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1I-Gy-M5R">
+                                            <rect key="frame" x="8" y="74" width="42" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="YpX-LO-qfN"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4CC-TQ-SuH">
+                                            <rect key="frame" x="325" y="74" width="42" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="MKK-Yl-LBV"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="bsy-Du-kae" firstAttribute="leading" secondItem="reb-6u-6ZW" secondAttribute="leadingMargin" id="2hs-Gp-3uF"/>
                                         <constraint firstItem="4J8-yz-HP5" firstAttribute="top" secondItem="bsy-Du-kae" secondAttribute="bottom" constant="8" id="Aix-ny-IKX"/>
+                                        <constraint firstItem="m1I-Gy-M5R" firstAttribute="leading" secondItem="reb-6u-6ZW" secondAttribute="leadingMargin" id="HlD-Cu-1Yc"/>
                                         <constraint firstItem="bsy-Du-kae" firstAttribute="top" secondItem="reb-6u-6ZW" secondAttribute="topMargin" id="OXb-fx-oVv"/>
+                                        <constraint firstItem="4CC-TQ-SuH" firstAttribute="trailing" secondItem="reb-6u-6ZW" secondAttribute="trailingMargin" id="S6e-Vc-j7q"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="m1I-Gy-M5R" secondAttribute="bottom" id="Yli-Om-w1h"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="4CC-TQ-SuH" secondAttribute="bottom" id="hwe-FV-mv3"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="4J8-yz-HP5" secondAttribute="trailing" id="iMa-uJ-zk1"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="bsy-Du-kae" secondAttribute="trailing" id="nDu-HX-he0"/>
                                         <constraint firstItem="4J8-yz-HP5" firstAttribute="leading" secondItem="reb-6u-6ZW" secondAttribute="leadingMargin" id="qqF-pb-wH2"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="4J8-yz-HP5" secondAttribute="bottom" id="tRm-nP-PV5"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="4J8-yz-HP5" secondAttribute="bottom" constant="24" id="tRm-nP-PV5"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="lblTweetAuthor" destination="bsy-Du-kae" id="Oyy-6d-j55"/>
+                                    <outlet property="lblTweetFavoriteCount" destination="m1I-Gy-M5R" id="7bQ-i2-Hsj"/>
+                                    <outlet property="lblTweetRetweetCount" destination="4CC-TQ-SuH" id="WZF-rP-1PB"/>
                                     <outlet property="lblTweetText" destination="4J8-yz-HP5" id="YNf-Oe-rmq"/>
                                 </connections>
                             </tableViewCell>

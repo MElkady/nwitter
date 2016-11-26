@@ -70,6 +70,8 @@ class TweetsViewController: UITableViewController, UISearchResultsUpdating, UISe
             cell.lblTweetText.handleMentionTap(self.handleMentionTap)
             cell.lblTweetText.handleURLTap(self.handleUrlTap)
             cell.lblTweetAuthor.text = t.user?.name
+            cell.lblTweetRetweetCount.text = "♥ \(t.retweetCount)"
+            cell.lblTweetFavoriteCount.text = "🔃 \(t.favoriteCount)"
             return cell
         }
         
@@ -93,9 +95,6 @@ class TweetsViewController: UITableViewController, UISearchResultsUpdating, UISe
     }
     
     public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.endEditing(true)
-        searchBar.resignFirstResponder()
-        
         if let t = self.timer {
             t.invalidate()
             self.timer = nil
@@ -104,6 +103,11 @@ class TweetsViewController: UITableViewController, UISearchResultsUpdating, UISe
         
         if let t = searchBar.text {
             print("searchBarSearchButtonClicked: \(t)")
+            
+            searchBar.endEditing(true)
+            searchBar.resignFirstResponder()
+            self.searchController.isActive = false
+            
             self.searchKeyWord = t
             self.searchTwitter(text: t, maxId: nil, sinceId: nil){ newTweets in
                 self.tweets = newTweets
@@ -268,5 +272,6 @@ class TweetsViewController: UITableViewController, UISearchResultsUpdating, UISe
 class TweetRow : UITableViewCell {
     @IBOutlet weak var lblTweetText: ActiveLabel!
     @IBOutlet weak var lblTweetAuthor: UILabel!
-    
+    @IBOutlet weak var lblTweetFavoriteCount: UILabel!
+    @IBOutlet weak var lblTweetRetweetCount: UILabel!
 }
